@@ -8,7 +8,7 @@ Implementação em Java do algoritmo de Busca Binária com:
 
 ## 📊 Fluxograma do Algoritmo
 
-```mermaid
+```
 graph TD
     A[Início] --> B{arr é nulo?}
     B -->|Sim| C[Lança exceção]

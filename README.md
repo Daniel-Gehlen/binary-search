@@ -8,19 +8,19 @@ Implementação em Java do algoritmo de Busca Binária com:
 
 ## 📊 Fluxograma do Algoritmo
 
-```
+```mermaid
 graph TD
-    A[Início] --> B{arr é nulo?}
-    B -->|Sim| C[Lança exceção]
-    B -->|Não| D[left = 0, right = arr.length-1]
+    A[Start] --> B{Is arr null?}
+    B -->|Yes| C[Throw Exception]
+    B -->|No| D[left=0, right=arr.length-1]
     D --> E{left <= right?}
-    E -->|Não| F[Retorna -1]
-    E -->|Sim| G[mid = left + (right-left)/2]
+    E -->|No| F[Return -1]
+    E -->|Yes| G[mid = left + (right-left)/2]
     G --> H{arr[mid] == target?}
-    H -->|Sim| I[Retorna mid]
-    H -->|Não| J{arr[mid] < target?}
-    J -->|Sim| K[left = mid + 1]
-    J -->|Não| L[right = mid - 1]
+    H -->|Yes| I[Return mid]
+    H -->|No| J{arr[mid] < target?}
+    J -->|Yes| K[left = mid + 1]
+    J -->|No| L[right = mid - 1]
     K --> E
     L --> E
 ```

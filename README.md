@@ -1,37 +1,106 @@
+# Binary Search em Java
+
+## 📌 Visão Geral
+Implementação em Java do algoritmo de Busca Binária com:
+- Código principal
+- Testes unitários
+- Fluxograma em Mermaid
+
+## 📊 Fluxograma do Algoritmo
+
+```mermaid
 graph TD
-  subgraph Initialization
-    arr[arr]
-    target[target]
-    left[left = 0]
-    right[right = arr.length - 1]
-    nullCheck[Check arr != null]
-  end
+    A[Início] --> B{arr é nulo?}
+    B -->|Sim| C[Lança exceção]
+    B -->|Não| D[left = 0, right = arr.length-1]
+    D --> E{left <= right?}
+    E -->|Não| F[Retorna -1]
+    E -->|Sim| G[mid = left + (right-left)/2]
+    G --> H{arr[mid] == target?}
+    H -->|Sim| I[Retorna mid]
+    H -->|Não| J{arr[mid] < target?}
+    J -->|Sim| K[left = mid + 1]
+    J -->|Não| L[right = mid - 1]
+    K --> E
+    L --> E
+```
 
-  subgraph Loop
-    checkLeftRight[left <= right?]
-    mid[mid = left + (right-left)/2]
-    checkMidValue[arr[mid] == target?]
-    updateLeftRight[Update left/right]
-  end
+## 📦 Estrutura do Projeto
 
-  subgraph Result
-    found[Return mid]
-    notFound[Return -1]
-    error[Throw Exception]
-  end
+```
+binary-search/
+└── BinarySearch.java
+└── BinarySearchTest.java
+└── pom.xml
+```
 
-  nullCheck -- Valid --> checkLeftRight
-  nullCheck -- Null --> error
+## 🛠️ Como Usar
 
-  checkLeftRight -- Yes --> mid
-  checkLeftRight -- No --> notFound
+1. **Compilar e executar testes**:
+```bash
+mvn test
+```
 
-  mid --> checkMidValue
-  checkMidValue -- Yes --> found
-  checkMidValue -- No --> updateLeftRight
+2. **Implementação principal**:
+```java
+public class BinarySearch {
+    public static int binarySearch(int[] arr, int target) {
+        if (arr == null) {
+            throw new IllegalArgumentException("Array não pode ser nulo");
+        }
+        
+        int left = 0;
+        int right = arr.length - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (arr[mid] == target) {
+                return mid;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        
+        return -1;
+    }
+}
+```
 
-  updateLeftRight -- arr[mid] < target --> leftUpdate[left = mid + 1]
-  updateLeftRight -- arr[mid] > target --> rightUpdate[right = mid - 1]
+## 🧪 Testes
 
-  leftUpdate --> checkLeftRight
-  rightUpdate --> checkLeftRight
+```java
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class BinarySearchTest {
+    // Testes aqui...
+}
+```
+
+## 🔍 Explicação do Fluxograma
+
+1. **Inicialização**:
+   - Verifica se o array é nulo
+   - Define os limites inicial (left) e final (right)
+
+2. **Loop Principal**:
+   - Calcula o ponto médio (mid)
+   - Compara o elemento no índice mid com o alvo
+   - Ajusta os limites de busca conforme a comparação
+
+3. **Resultados**:
+   - Retorna o índice se encontrado
+   - Retorna -1 se não encontrado
+   - Lança exceção para entrada inválida
+
+## ✅ Como Renderizar o Fluxograma
+
+1. Em plataformas que suportam Mermaid (como GitHub):
+   - O diagrama será renderizado automaticamente
+
+2. Localmente:
+   - Use editores como Mermaid Live Editor
+   - Ou instale a extensão Mermaid para VS Code

@@ -129,16 +129,6 @@ flowchart LR
    - Ajusta os ponteiros conforme o resultado da comparação
 3. **Resultado**: Retorna índice se encontrado, -1 caso contrário
 
-## ✅ Como Renderizar o Fluxograma
-
-### GitHub/GitLab:
-- O diagrama será renderizado automaticamente em arquivos `.md`
-
-### Localmente:
-- **VS Code**: Instale a extensão "Markdown Preview Mermaid Support"
-- **Online**: Use [Mermaid Live Editor](https://mermaid.live/)
-- **Documentação**: [Mermaid Documentation](https://mermaid.js.org/)
-
 ## 🚀 Exemplo de Uso
 
 ```java

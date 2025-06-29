@@ -84,39 +84,31 @@ public class BinarySearchTest {
 }
 ```
 
-## 📊 Fluxograma do Algoritmo
+## 📊 Fluxograma do Algoritmo Binary Search
 
 ```mermaid
 flowchart TD
-    A[Início: binarySearch array, target] --> B{Array é nulo?}
-    B -->|Sim| C[Lançar IllegalArgumentException]
-    B -->|Não| D[Inicializar: left = 0, right = length-1]
-    D --> E{left <= right?}
-    E -->|Não| F[Retornar -1: não encontrado]
-    E -->|Sim| G[Calcular: mid = left + right - left / 2]
-    G --> H{arr[mid] == target?}
-    H -->|Sim| I[Retornar mid: encontrado]
-    H -->|Não| J{arr[mid] < target?}
+    A[Início: binarySearch] --> B{Array é nulo?}
+    B -->|Sim| C[Lançar Exception]
+    B -->|Não| D[left = 0, right = length-1]
+    D --> E{left menor igual right?}
+    E -->|Não| F[Retornar -1]
+    E -->|Sim| G[mid = left + right - left / 2]
+    G --> H{elemento mid igual target?}
+    H -->|Sim| I[Retornar mid]
+    H -->|Não| J{elemento mid menor que target?}
     J -->|Sim| K[left = mid + 1]
     J -->|Não| L[right = mid - 1]
     K --> E
     L --> E
-    
-    style A fill:#e1f5fe
-    style I fill:#c8e6c9
-    style F fill:#ffcdd2
-    style C fill:#ffcdd2
 ```
 
-## 📊 Exemplo Visual
+## Exemplo Prático
 
 ```mermaid
 flowchart LR
-    subgraph "Exemplo: Buscar 8 em [2,4,6,8,10]"
-        A1["Passo 1: left=0, right=4, mid=2<br/>arr[2]=6 < 8"] --> A2["Passo 2: left=3, right=4, mid=3<br/>arr[3]=8 == 8"] --> A3["Resultado: índice 3"]
-    end
-    
-    style A3 fill:#c8e6c9
+    A[Array: 2,4,6,8,10] --> B[Target: 8]
+    B --> C[Resultado: índice 3]
 ```
 
 ## 🔍 Explicação do Algoritmo

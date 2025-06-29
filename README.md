@@ -17,12 +17,12 @@ binary-search/
 
 ## 🛠️ Como Usar
 
-1. **Compilar e executar testes**:
+### 1. Compilar e executar testes:
 ```bash
 mvn test
 ```
 
-2. **Implementação principal**:
+### 2. Implementação principal:
 ```java
 public class BinarySearch {
     public static int binarySearch(int[] arr, int target) {
@@ -51,65 +51,158 @@ public class BinarySearch {
 ```
 
 ## 🧪 Testes
-
 ```java
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BinarySearchTest {
-    // Testes aqui...
+    
+    @Test
+    public void testBinarySearchFound() {
+        int[] arr = {1, 3, 5, 7, 9, 11};
+        assertEquals(2, BinarySearch.binarySearch(arr, 5));
+    }
+    
+    @Test
+    public void testBinarySearchNotFound() {
+        int[] arr = {1, 3, 5, 7, 9, 11};
+        assertEquals(-1, BinarySearch.binarySearch(arr, 4));
+    }
+    
+    @Test
+    public void testBinarySearchEmptyArray() {
+        int[] arr = {};
+        assertEquals(-1, BinarySearch.binarySearch(arr, 5));
+    }
+    
+    @Test
+    public void testBinarySearchNullArray() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            BinarySearch.binarySearch(null, 5);
+        });
+    }
 }
 ```
 
-## 🔍 Explicação do Fluxograma
+## 📊 Fluxograma do Algoritmo
 
-1. **Inicialização**:
-   - Verifica se o array é nulo
-   - Define os limites inicial (left) e final (right)
+```mermaid
+flowchart TD
+    A[Início: binarySearch array, target] --> B{Array é nulo?}
+    B -->|Sim| C[Lançar IllegalArgumentException]
+    B -->|Não| D[Inicializar: left = 0, right = length-1]
+    D --> E{left <= right?}
+    E -->|Não| F[Retornar -1: não encontrado]
+    E -->|Sim| G[Calcular: mid = left + right - left / 2]
+    G --> H{arr[mid] == target?}
+    H -->|Sim| I[Retornar mid: encontrado]
+    H -->|Não| J{arr[mid] < target?}
+    J -->|Sim| K[left = mid + 1]
+    J -->|Não| L[right = mid - 1]
+    K --> E
+    L --> E
+    
+    style A fill:#e1f5fe
+    style I fill:#c8e6c9
+    style F fill:#ffcdd2
+    style C fill:#ffcdd2
+```
 
-2. **Loop Principal**:
-   - Calcula o ponto médio (mid)
-   - Compara o elemento no índice mid com o alvo
-   - Ajusta os limites de busca conforme a comparação
+## 📊 Exemplo Visual
 
-3. **Resultados**:
-   - Retorna o índice se encontrado
-   - Retorna -1 se não encontrado
-   - Lança exceção para entrada inválida
+```mermaid
+flowchart LR
+    subgraph "Exemplo: Buscar 8 em [2,4,6,8,10]"
+        A1["Passo 1: left=0, right=4, mid=2<br/>arr[2]=6 < 8"] --> A2["Passo 2: left=3, right=4, mid=3<br/>arr[3]=8 == 8"] --> A3["Resultado: índice 3"]
+    end
+    
+    style A3 fill:#c8e6c9
+```
+
+## 🔍 Explicação do Algoritmo
+
+### Complexidade:
+- **Tempo**: O(log n) - divide o espaço de busca pela metade a cada iteração
+- **Espaço**: O(1) - usa apenas algumas variáveis auxiliares
+
+### Pré-requisitos:
+- O array deve estar **ordenado** em ordem crescente
+- Elementos devem ser comparáveis
+
+### Passos do Algoritmo:
+1. **Inicialização**: Define ponteiros para início (left) e fim (right) do array
+2. **Loop Principal**: Enquanto left ≤ right:
+   - Calcula o ponto médio para evitar overflow: `mid = left + (right - left) / 2`
+   - Compara elemento no meio com o alvo
+   - Ajusta os ponteiros conforme o resultado da comparação
+3. **Resultado**: Retorna índice se encontrado, -1 caso contrário
 
 ## ✅ Como Renderizar o Fluxograma
 
-1. Em plataformas que suportam Mermaid (como GitHub):
-   - O diagrama será renderizado automaticamente
+### GitHub/GitLab:
+- O diagrama será renderizado automaticamente em arquivos `.md`
 
-2. Localmente:
-   - Use editores como Mermaid Live Editor
-   - Ou instale a extensão Mermaid para VS Code
-  
-## 📊 Fluxograma do Algoritmo
-```mermaid
-graph TD
+### Localmente:
+- **VS Code**: Instale a extensão "Markdown Preview Mermaid Support"
+- **Online**: Use [Mermaid Live Editor](https://mermaid.live/)
+- **Documentação**: [Mermaid Documentation](https://mermaid.js.org/)
 
-subgraph BinarySearchProcess
-    A[Initialize pointers] --> B{Array null?}
-    B -->|Yes| C[Throw error]
-    B -->|No| D[Calculate mid]
-    D --> E{arr[mid] == target?}
-    E -->|Yes| F[Return index]
-    E -->|No| G{arr[mid] < target?}
-    G -->|Yes| H[Adjust left]
-    G -->|No| I[Adjust right]
-    H --> D
-    I --> D
-end
+## 🚀 Exemplo de Uso
 
-subgraph Example
-    J[Input: [2,4,6,8,10]]
-    K[Target: 8]
-    L[Output: Index 3]
-end
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] numbers = {1, 3, 5, 7, 9, 11, 13, 15};
+        int target = 7;
+        
+        int result = BinarySearch.binarySearch(numbers, target);
+        
+        if (result != -1) {
+            System.out.println("Elemento " + target + " encontrado no índice: " + result);
+        } else {
+            System.out.println("Elemento " + target + " não encontrado");
+        }
+    }
+}
+```
 
-J --> BinarySearchProcess
-K --> BinarySearchProcess
-BinarySearchProcess --> L
+## 📋 Dependências (pom.xml)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.example</groupId>
+    <artifactId>binary-search</artifactId>
+    <version>1.0.0</version>
+    
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <junit.version>5.8.2</junit.version>
+    </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M7</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
 ```

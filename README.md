@@ -10,19 +10,33 @@ Implementação em Java do algoritmo de Busca Binária com:
 
 ```mermaid
 graph TD
-    A[Start] --> B{Is arr null?}
-    B -->|Yes| C[Throw Exception]
-    B -->|No| D[left=0, right=arr.length-1]
-    D --> E{left <= right?}
-    E -->|No| F[Return -1]
-    E -->|Yes| G[mid = left + (right-left)/2]
-    G --> H{arr[mid] == target?}
-    H -->|Yes| I[Return mid]
-    H -->|No| J{arr[mid] < target?}
-    J -->|Yes| K[left = mid + 1]
-    J -->|No| L[right = mid - 1]
-    K --> E
-    L --> E
+
+subgraph BinarySearchProcess
+    initialize[Initialize: left=0, right=length-1]
+    checkNull{Array is null?}
+    findMid[Calculate mid point]
+    compare{arr[mid] == target?}
+    adjustBounds[Adjust search bounds]
+    returnResult[Return result]
+end
+
+subgraph ExampleExecution
+    inputArray[[2, 4, 6, 8, 10, 12, 14]]
+    searchTarget[Target: 10]
+    outputResult[Found at index 4]
+end
+
+initialize --> checkNull
+checkNull --> |No| findMid
+checkNull --> |Yes| returnError[Throw exception]
+findMid --> compare
+compare --> |Yes| returnResult
+compare --> |No| adjustBounds
+adjustBounds --> |new bounds| findMid
+
+inputArray --> |passed to| BinarySearchProcess
+searchTarget --> |input| BinarySearchProcess
+BinarySearchProcess --> |output| outputResult
 ```
 
 ## 📦 Estrutura do Projeto

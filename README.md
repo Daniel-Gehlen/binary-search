@@ -6,35 +6,6 @@ Implementação em Java do algoritmo de Busca Binária com:
 - Testes unitários
 - Fluxograma em Mermaid
 
-## 📊 Fluxograma do Algoritmo
-
-```mermaid
-graph TD
-
-subgraph BinarySearchProcess
-    A[Initialize pointers] --> B{Array null?}
-    B -->|Yes| C[Throw error]
-    B -->|No| D[Calculate mid]
-    D --> E{arr[mid] == target?}
-    E -->|Yes| F[Return index]
-    E -->|No| G{arr[mid] < target?}
-    G -->|Yes| H[Adjust left]
-    G -->|No| I[Adjust right]
-    H --> D
-    I --> D
-end
-
-subgraph Example
-    J[Input: [2,4,6,8,10]]
-    K[Target: 8]
-    L[Output: Index 3]
-end
-
-J --> BinarySearchProcess
-K --> BinarySearchProcess
-BinarySearchProcess --> L
-```
-
 ## 📦 Estrutura do Projeto
 
 ```
@@ -114,3 +85,31 @@ public class BinarySearchTest {
 2. Localmente:
    - Use editores como Mermaid Live Editor
    - Ou instale a extensão Mermaid para VS Code
+  
+## 📊 Fluxograma do Algoritmo
+```mermaid
+graph TD
+
+subgraph BinarySearchProcess
+    A[Initialize pointers] --> B{Array null?}
+    B -->|Yes| C[Throw error]
+    B -->|No| D[Calculate mid]
+    D --> E{arr[mid] == target?}
+    E -->|Yes| F[Return index]
+    E -->|No| G{arr[mid] < target?}
+    G -->|Yes| H[Adjust left]
+    G -->|No| I[Adjust right]
+    H --> D
+    I --> D
+end
+
+subgraph Example
+    J[Input: [2,4,6,8,10]]
+    K[Target: 8]
+    L[Output: Index 3]
+end
+
+J --> BinarySearchProcess
+K --> BinarySearchProcess
+BinarySearchProcess --> L
+```

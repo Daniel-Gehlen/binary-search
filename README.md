@@ -12,31 +12,27 @@ Implementação em Java do algoritmo de Busca Binária com:
 graph TD
 
 subgraph BinarySearchProcess
-    initialize[Initialize: left=0, right=length-1]
-    checkNull{Array is null?}
-    findMid[Calculate mid point]
-    compare{arr[mid] == target?}
-    adjustBounds[Adjust search bounds]
-    returnResult[Return result]
+    A[Initialize pointers] --> B{Array null?}
+    B -->|Yes| C[Throw error]
+    B -->|No| D[Calculate mid]
+    D --> E{arr[mid] == target?}
+    E -->|Yes| F[Return index]
+    E -->|No| G{arr[mid] < target?}
+    G -->|Yes| H[Adjust left]
+    G -->|No| I[Adjust right]
+    H --> D
+    I --> D
 end
 
-subgraph ExampleExecution
-    inputArray[[2, 4, 6, 8, 10, 12, 14]]
-    searchTarget[Target: 10]
-    outputResult[Found at index 4]
+subgraph Example
+    J[Input: [2,4,6,8,10]]
+    K[Target: 8]
+    L[Output: Index 3]
 end
 
-initialize --> checkNull
-checkNull --> |No| findMid
-checkNull --> |Yes| returnError[Throw exception]
-findMid --> compare
-compare --> |Yes| returnResult
-compare --> |No| adjustBounds
-adjustBounds --> |new bounds| findMid
-
-inputArray --> |passed to| BinarySearchProcess
-searchTarget --> |input| BinarySearchProcess
-BinarySearchProcess --> |output| outputResult
+J --> BinarySearchProcess
+K --> BinarySearchProcess
+BinarySearchProcess --> L
 ```
 
 ## 📦 Estrutura do Projeto
